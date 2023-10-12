@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "342205767293",
-    "project_id": "evaluacion2-401502",
-    "storage_bucket": "evaluacion2-401502.appspot.com"
+    "project_number": "348317433646",
+    "project_id": "evaluacion2tnt",
+    "storage_bucket": "evaluacion2tnt.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:342205767293:android:7cc0e68d203ccb81629b14",
+        "mobilesdk_app_id": "1:348317433646:android:ef0d1493e21c868f7b04bf",
         "android_client_info": {
           "package_name": "cl.ipvg.ev2tnt"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAixxgj2dHZnE1Ot2xAc-EA23bUdpI5nXo"
+          "current_key": "AIzaSyBuD6xKPYkSmevbUyR0TuBGErRC7QSCzLQ"
         }
       ],
       "services": {
