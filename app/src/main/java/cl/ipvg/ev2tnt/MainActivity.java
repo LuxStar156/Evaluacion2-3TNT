@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             locationStart();
         }
 
+        MapsFragment mapfragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
         inicializarFireBase();
     }
     private void inicializarFireBase(){
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
     }
 
+    //codigo para geolocalizacion
     private void locationStart(){
         LocationManager mlocManager =(LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
