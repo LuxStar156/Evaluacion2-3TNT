@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.Manifest;
 import android.content.Context;
@@ -28,6 +30,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
+    Button btRegistro;
+    Intent intentregistro;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     @Override
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         tvLatitud = (TextView) findViewById(R.id.tVLatitud);
         tvLongitud = (TextView) findViewById(R.id.tVLongitud);
         tvDireccion = (TextView) findViewById(R.id.tVDireccion);
+        btRegistro = (Button) findViewById(R.id.btIngresardatos);
+        intentregistro = new Intent(this, Registro.class);
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -50,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
         inicializarFireBase();
+
+        btRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intentregistro);
+            }
+        });
     }
     private void inicializarFireBase(){
         FirebaseApp.initializeApp(this);
