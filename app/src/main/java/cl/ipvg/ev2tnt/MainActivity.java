@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        inicializarFireBase();
+        MapsFragment mapfragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
+
         tvLatitud = (TextView) findViewById(R.id.tVLatitud);
         tvLongitud = (TextView) findViewById(R.id.tVLongitud);
         tvDireccion = (TextView) findViewById(R.id.tVDireccion);
@@ -53,10 +57,6 @@ public class MainActivity extends AppCompatActivity {
             locationStart();
         }
 
-        MapsFragment mapfragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
-        inicializarFireBase();
-
         btRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,13 +64,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void inicializarFireBase(){
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
 
-    //codigo para geolocalizacion
+    //-------------------------------codigo para geolocalizacion----------------------------------
     private void locationStart(){
         LocationManager mlocManager =(LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
