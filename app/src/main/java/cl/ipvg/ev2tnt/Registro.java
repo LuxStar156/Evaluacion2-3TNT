@@ -15,11 +15,13 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.AndroidException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -78,9 +80,12 @@ public class Registro extends AppCompatActivity {
                 vehiculo.setLongitud(Longitud);
                 vehiculo.setDireccion(Direccion);
 
-                databaseReference.child("Vehiculo").child(vehiculo.getId()).setValue(vehiculo);
-
-
+                try {
+                    databaseReference.child("Vehiculo").child(vehiculo.getId()).setValue(vehiculo);
+                    Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "Sus datos fueron registrados exitosamente", Snackbar.LENGTH_SHORT).show();
+                }catch (UnsupportedOperationException e){
+                    Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "ERROR, Sus datos no fueron registrados", Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -91,7 +96,7 @@ public class Registro extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
     }
 
-    //------------------------------------codigo para geolocalizacion-------------------------------------
+    //---------------------------------------------------codigo para geolocalizacion------------------------------------------------
     private void locationStart(){
         LocationManager mlocManager =(LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Registro.Localizacion Local = new Registro.Localizacion();//MainUser.Localizacion Local = new MainUser.Localizacion();

@@ -11,10 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="174dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="179dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,10 +24,11 @@
         android:layout_width="311dp"
         android:layout_height="45dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -48,7 +50,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Nombre" />
+            android:hint="Nombre" />
 
         <EditText
             android:id="@+id/editTextApellido"
@@ -57,7 +59,12 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Apellido" />
+            android:hint="Apellido" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/snackbar_RegistroTrue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <EditText
             android:id="@+id/editTextMatricula"
@@ -66,7 +73,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Matrícula" />
+            android:hint="Matrícula" />
 
         <EditText
             android:id="@+id/editTextMarca"
@@ -75,7 +82,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Marca" />
+            android:hint="Marca" />
 
         <EditText
             android:id="@+id/editTextModelo"
@@ -84,7 +91,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Modelo" />
+            android:hint="Modelo" />
 
         <EditText
             android:id="@+id/editTextLinea"
@@ -93,7 +100,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Línea de transportes" />
+            android:hint="Línea de transportes" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

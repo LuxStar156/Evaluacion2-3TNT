@@ -51,7 +51,7 @@ public class MainUser extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
     }
 
-    //-------------------------------------codigo para geolocalizacion--------------------------------
+    //----------------------------------------------------codigo para geolocalizacion----------------------------------------------
     private void locationStart(){
         LocationManager mlocManager =(LocationManager) getSystemService(Context.LOCATION_SERVICE);
         MainUser.Localizacion Local = new MainUser.Localizacion();
