@@ -6,4 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".Registro">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="179dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="311dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="50dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="74dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Nombre" />
+
+        <EditText
+            android:id="@+id/editTextText6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Apellido" />
+
+        <EditText
+            android:id="@+id/editTextText5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Matrícula" />
+
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Marca" />
+
+        <EditText
+            android:id="@+id/editTextText7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Línea" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
