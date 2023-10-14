@@ -10,6 +10,10 @@ public class Vehiculo {
     private String longitud;
     private String direccion;
 
+    public Vehiculo(){
+      //contructor para DataSnapshot
+    }
+
     public Vehiculo(String nombre, String apellido, String matricula, String marca, String linea, String latitud, String longitud, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
