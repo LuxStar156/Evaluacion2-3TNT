@@ -1,29 +1,43 @@
 package cl.ipvg.ev2tnt.Clases;
 
+import androidx.annotation.NonNull;
+
 public class Vehiculo {
+    private String id;
     private String nombre;
     private String apellido;
     private String matricula;
     private String marca;
+    private String modelo;
     private String linea;
     private String latitud;
     private String longitud;
     private String direccion;
 
     public Vehiculo(){
-      //contructor para DataSnapshot
+      //contructor para DataSnapshot(Leer datos)
     }
 
-    public Vehiculo(String nombre, String apellido, String matricula, String marca, String linea, String latitud, String longitud, String direccion) {
+    public Vehiculo(String id, String nombre, String apellido, String matricula, String marca, String modelo, String linea, String latitud, String longitud, String direccion) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;
         this.marca = marca;
+        this.modelo = modelo;
         this.linea = linea;
         this.latitud = latitud;
         this.longitud = longitud;
         this.direccion = direccion;
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -56,6 +70,14 @@ public class Vehiculo {
 
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public String getLinea() {

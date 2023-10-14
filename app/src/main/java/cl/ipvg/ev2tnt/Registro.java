@@ -16,8 +16,9 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -25,11 +26,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.Locale;
+
+import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
 public class Registro extends AppCompatActivity {
 
-    TextView tvLatitud, tvLongitud, tvDireccion;
+    EditText etNombre, etApellido, etMatricula, etMarca, etModelo,etLinea;
+    String Latitud, Longitud, Direccion;
+    Button btRegis;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -37,9 +43,16 @@ public class Registro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_user);
+        setContentView(R.layout.activity_registro);
 
         inicializarFireBase();
+        btRegis = (Button) findViewById(R.id.btRegistrar);
+        etNombre = (EditText) findViewById(R.id.editTextNombre);
+        etApellido = (EditText) findViewById(R.id.editTextApellido);
+        etMatricula = (EditText) findViewById(R.id.editTextMatricula);
+        etMarca = (EditText) findViewById(R.id.editTextMarca);
+        etModelo = (EditText) findViewById(R.id.editTextModelo);
+        etLinea = (EditText) findViewById(R.id.editTextLinea);
 
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -48,6 +61,28 @@ public class Registro extends AppCompatActivity {
         }else {
             locationStart();
         }
+
+        btRegis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Vehiculo vehiculo = new Vehiculo();
+
+                vehiculo.setId(UUID.randomUUID().toString());
+                vehiculo.setNombre(etNombre.getText().toString());
+                vehiculo.setApellido(etApellido.getText().toString());
+                vehiculo.setMatricula(etMatricula.getText().toString());
+                vehiculo.setMarca(etMarca.getText().toString());
+                vehiculo.setModelo(etModelo.getText().toString());
+                vehiculo.setLinea(etLinea.getText().toString());
+                vehiculo.setLatitud(Latitud);
+                vehiculo.setLongitud(Longitud);
+                vehiculo.setDireccion(Direccion);
+
+                databaseReference.child("Vehiculo").child(vehiculo.getId()).setValue(vehiculo);
+
+
+            }
+        });
     }
 
     private void inicializarFireBase(){
@@ -73,8 +108,8 @@ public class Registro extends AppCompatActivity {
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,(LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,(LocationListener) Local);
-        tvLatitud.setText("Localización GPS");
-        tvDireccion.setText("");
+        Latitud = "Localización GPS";
+        Direccion = "";
 
     }
 
@@ -87,7 +122,7 @@ public class Registro extends AppCompatActivity {
                         loc.getLatitude(), loc.getLongitude(), 1);
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
-                    tvDireccion.setText(DirCalle.getAddressLine(0));
+                    Direccion = DirCalle.getAddressLine(0);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -110,21 +145,21 @@ public class Registro extends AppCompatActivity {
         public void onLocationChanged(Location loc) {
             loc.getLatitude();
             loc.getLongitude();
-            tvLatitud.setText(String.valueOf(loc.getLatitude()));
-            tvLongitud.setText(String.valueOf(loc.getLongitude()));
+            Latitud = (String.valueOf(loc.getLatitude()));
+            Longitud = (String.valueOf(loc.getLongitude()));
             this.registro.setLocation(loc);
         }
         @Override
         public void onProviderDisabled(String provider){
 
-            tvLatitud.setText("GPS Desactivado");
+            Latitud = "GPS Desactivado";
 
         }
 
         @Override
         public void onProviderEnabled(String provider){
 
-            tvLatitud.setText("GPS Activado");
+            Latitud = "GPS Activado";
 
         }
         @Override

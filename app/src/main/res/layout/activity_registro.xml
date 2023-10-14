@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btRegistrar"
         android:layout_width="311dp"
         android:layout_height="45dp"
         android:layout_marginStart="50dp"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="30dp"
@@ -51,7 +51,7 @@
             android:text="Nombre" />
 
         <EditText
-            android:id="@+id/editTextText6"
+            android:id="@+id/editTextApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -60,7 +60,7 @@
             android:text="Apellido" />
 
         <EditText
-            android:id="@+id/editTextText5"
+            android:id="@+id/editTextMatricula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -69,7 +69,7 @@
             android:text="Matrícula" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/editTextMarca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -78,13 +78,22 @@
             android:text="Marca" />
 
         <EditText
-            android:id="@+id/editTextText7"
+            android:id="@+id/editTextModelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Línea" />
+            android:text="Modelo" />
+
+        <EditText
+            android:id="@+id/editTextLinea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Línea de transportes" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
