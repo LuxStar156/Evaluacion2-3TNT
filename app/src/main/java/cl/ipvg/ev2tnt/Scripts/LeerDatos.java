@@ -28,12 +28,10 @@ public class LeerDatos extends AppCompatActivity {
         databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot objs : snapshot.getChildren()){
-                    Vehiculo v = objs.getValue(Vehiculo.class);
+                    Vehiculo v = snapshot.getValue(Vehiculo.class);
                     latitud = Double.parseDouble(v.getLatitud());
                     longitud = Double.parseDouble(v.getLongitud());
 
-                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
