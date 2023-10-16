@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import cl.ipvg.ev2tnt.Scripts.LeerDatos;
+
 public class MainUser extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
     Button btRegistro;
@@ -38,6 +40,8 @@ public class MainUser extends AppCompatActivity {
         tvDireccion = (TextView) findViewById(R.id.tVDireccionUser);
 
 
+        MapsFragment mapfragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
 
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -47,8 +51,6 @@ public class MainUser extends AppCompatActivity {
             locationStart();
         }
 
-        MapsFragment mapfragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
     }
 
     //----------------------------------------------------codigo para geolocalizacion----------------------------------------------

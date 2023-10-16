@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import cl.ipvg.ev2tnt.Scripts.LeerDatos;
+
 public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
     Button btRegistro;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         inicializarFireBase();
+
+
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
 

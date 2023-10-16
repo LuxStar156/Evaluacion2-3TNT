@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import cl.ipvg.ev2tnt.Scripts.LeerDatos;
+
 public class Inicio extends AppCompatActivity {
     Button btUser;
     Button btDriver;
     Intent intent1;
     Intent intent2;
+    LeerDatos leerDatos = new LeerDatos();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +30,18 @@ public class Inicio extends AppCompatActivity {
         btDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                leerDatos.listarC();
                 startActivity(intent1);
+
             }
         });
 
         btUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                leerDatos.listarC();
                 startActivity(intent2);
+
             }
         });
     }
