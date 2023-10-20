@@ -30,7 +30,7 @@ public class Inicio extends AppCompatActivity {
         btDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                leerDatos.listarC();
+
                 startActivity(intent1);
 
             }
@@ -39,7 +39,7 @@ public class Inicio extends AppCompatActivity {
         btUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                leerDatos.listarC();
+
                 startActivity(intent2);
 
             }

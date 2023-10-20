@@ -23,6 +23,8 @@ import cl.ipvg.ev2tnt.Scripts.LeerDatos;
 public class MapsFragment extends Fragment {
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
+
+
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LeerDatos leerDatos = new LeerDatos();

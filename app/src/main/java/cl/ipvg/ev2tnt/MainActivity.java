@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        inicializarFireBase();
-
-
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
 
@@ -67,12 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentregistro);
             }
         });
-    }
-
-    private void inicializarFireBase(){
-        FirebaseApp.initializeApp(this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
     }
 
     //---------------------------------------------codigo para geolocalizacion-------------------------------------------
