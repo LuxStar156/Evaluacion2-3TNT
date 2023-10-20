@@ -22,12 +22,11 @@ import cl.ipvg.ev2tnt.Scripts.LeerDatos;
 
 public class MapsFragment extends Fragment {
 
-
-
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LeerDatos leerDatos = new LeerDatos();
+            leerDatos.listarC();
 
             LatLng vehiculo= new LatLng(leerDatos.getLatitud(), leerDatos.getLongitud());
             googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));

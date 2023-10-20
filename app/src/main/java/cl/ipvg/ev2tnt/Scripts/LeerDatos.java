@@ -25,6 +25,7 @@ public class LeerDatos extends AppCompatActivity {
 
 
     public void listarC(){
+        inicializarFireBase();
         databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
