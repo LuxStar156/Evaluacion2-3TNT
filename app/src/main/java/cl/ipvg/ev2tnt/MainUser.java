@@ -34,10 +34,6 @@ import java.util.Locale;
 
 public class MainUser extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
-    String latitud;
-    String longitud;
-    Double lat;
-    Double lon;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -73,11 +69,22 @@ public class MainUser extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    latitud = snapshot.child("latitud").getValue().toString();
-                    longitud = snapshot.child("longitud").getValue().toString();
+                    String latitud = snapshot.child("latitud").getValue().toString();
+                    String longitud = snapshot.child("longitud").getValue().toString();
 
-                    lat = Double.parseDouble(latitud);
-                    lon = Double.parseDouble(longitud);
+                    Double lat = Double.parseDouble(latitud);
+                    Double lon = Double.parseDouble(longitud);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("latitud", lat);
+                    bundle.putDouble("longitud",lon);
+
+                    MapsFragment fragment = new MapsFragment();
+                    fragment.setArguments(bundle);
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.gmap1, fragment);
+                    transaction.commit();
                 }
             }
 
@@ -86,17 +93,6 @@ public class MainUser extends AppCompatActivity {
 
             }
         });
-
-        Bundle bundle = new Bundle();
-        bundle.putDouble("latitud", lat);
-        bundle.putDouble("longitud",lon);
-
-        MapsFragment fragment = new MapsFragment();
-        fragment.setArguments(bundle);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.gmap1, fragment);
-        transaction.commit();
     }
 
     //----------------------------------------------------codigo para geolocalizacion----------------------------------------------

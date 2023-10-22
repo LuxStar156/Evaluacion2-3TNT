@@ -25,10 +25,9 @@ public class MapsFragment extends Fragment {
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
             Bundle args = getArguments();
-            Double valor1 = args.getDouble("longitud");
-            Double valor2 = args.getDouble("latitud");
+            Double valor1 = args.getDouble("latitud");
+            Double valor2 = args.getDouble("longitud");
 
             lat = valor1;
             lon = valor2;
