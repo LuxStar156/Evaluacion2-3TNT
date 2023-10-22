@@ -18,6 +18,11 @@ public class Vehiculo {
       //contructor para DataSnapshot(Leer datos)
     }
 
+    public Vehiculo(String latitud,String longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
     public Vehiculo(String id, String nombre, String apellido, String matricula, String marca, String modelo, String linea, String latitud, String longitud, String direccion) {
         this.id = id;
         this.nombre = nombre;

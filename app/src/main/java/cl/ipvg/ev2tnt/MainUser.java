@@ -1,7 +1,9 @@
 package cl.ipvg.ev2tnt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Context;
@@ -19,26 +21,36 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import cl.ipvg.ev2tnt.Scripts.LeerDatos;
-
 public class MainUser extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
-    Button btRegistro;
-
+    String latitud;
+    String longitud;
+    Double lat;
+    Double lon;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
 
+        enviarDatos();
+
         tvLatitud = (TextView) findViewById(R.id.tVLatitudUser);
         tvLongitud = (TextView) findViewById(R.id.tVLongitudUser);
         tvDireccion = (TextView) findViewById(R.id.tVDireccionUser);
-
 
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
@@ -51,6 +63,40 @@ public class MainUser extends AppCompatActivity {
             locationStart();
         }
 
+    }
+
+    public void enviarDatos(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference =firebaseDatabase.getReference();
+        databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    latitud = snapshot.child("latitud").getValue().toString();
+                    longitud = snapshot.child("longitud").getValue().toString();
+
+                    lat = Double.parseDouble(latitud);
+                    lon = Double.parseDouble(longitud);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        Bundle bundle = new Bundle();
+        bundle.putDouble("latitud", lat);
+        bundle.putDouble("longitud",lon);
+
+        MapsFragment fragment = new MapsFragment();
+        fragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.gmap1, fragment);
+        transaction.commit();
     }
 
     //----------------------------------------------------codigo para geolocalizacion----------------------------------------------

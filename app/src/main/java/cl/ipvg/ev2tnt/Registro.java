@@ -27,7 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.Locale;
 
@@ -67,21 +69,21 @@ public class Registro extends AppCompatActivity {
         btRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Vehiculo vehiculo = new Vehiculo();
+                Map<String,Object> vehiculo = new HashMap<>(); //Lo incluí como hashmap, me funciona mejor
 
-                vehiculo.setId(UUID.randomUUID().toString());
-                vehiculo.setNombre(etNombre.getText().toString());
-                vehiculo.setApellido(etApellido.getText().toString());
-                vehiculo.setMatricula(etMatricula.getText().toString());
-                vehiculo.setMarca(etMarca.getText().toString());
-                vehiculo.setModelo(etModelo.getText().toString());
-                vehiculo.setLinea(etLinea.getText().toString());
-                vehiculo.setLatitud(Latitud);
-                vehiculo.setLongitud(Longitud);
-                vehiculo.setDireccion(Direccion);
+                vehiculo.put("id",UUID.randomUUID().toString());
+                vehiculo.put("nombre",etNombre.getText().toString());
+                vehiculo.put("apellido",etApellido.getText().toString());
+                vehiculo.put("matricula",etMatricula.getText().toString());
+                vehiculo.put("marca",etMarca.getText().toString());
+                vehiculo.put("modelo",etModelo.getText().toString());
+                vehiculo.put("linea",etLinea.getText().toString());
+                vehiculo.put("latitud",Latitud);
+                vehiculo.put("longitud",Longitud);
+                vehiculo.put("direccion",Direccion);
 
                 try {
-                    databaseReference.child("Vehiculo").child(vehiculo.getId()).setValue(vehiculo);
+                    databaseReference.child("Vehiculo").setValue(vehiculo);
                     Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "Sus datos fueron registrados exitosamente", Snackbar.LENGTH_SHORT).show();
                 }catch (UnsupportedOperationException e){
                     Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "ERROR, Sus datos no fueron registrados", Snackbar.LENGTH_SHORT).show();

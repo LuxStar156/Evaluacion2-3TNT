@@ -18,17 +18,25 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-
 public class MapsFragment extends Fragment {
+    Double lat = 0.0;
+    Double lon = 0.0;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
+            Bundle args = getArguments();
+            Double valor1 = args.getDouble("longitud");
+            Double valor2 = args.getDouble("latitud");
 
-            LatLng vehiculo= new LatLng(40.423, -122.1223);
+            lat = valor1;
+            lon = valor2;
+
+            LatLng vehiculo= new LatLng(lat, lon);
             googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(vehiculo));
+
         }
     };
 
@@ -49,4 +57,6 @@ public class MapsFragment extends Fragment {
             mapFragment.getMapAsync(callback);
         }
     }
+
+
 }

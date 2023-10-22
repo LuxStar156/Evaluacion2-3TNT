@@ -20,15 +20,12 @@ import android.location.LocationProvider;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
-import cl.ipvg.ev2tnt.Scripts.LeerDatos;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
