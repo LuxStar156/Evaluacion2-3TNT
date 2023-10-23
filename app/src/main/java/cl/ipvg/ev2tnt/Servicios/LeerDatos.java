@@ -17,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class LeerDatos extends Service { //En construcción
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -28,6 +27,10 @@ public class LeerDatos extends Service { //En construcción
     public void onCreate(){
         Log.d("Leer datos", "Servicio creado");
 
+        leerData();
+    }
+
+    public void leerData(){
         FirebaseApp.initializeApp(this);
         firebaseDatabase =FirebaseDatabase.getInstance();
         databaseReference =firebaseDatabase.getReference();
@@ -54,6 +57,4 @@ public class LeerDatos extends Service { //En construcción
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-
 }
