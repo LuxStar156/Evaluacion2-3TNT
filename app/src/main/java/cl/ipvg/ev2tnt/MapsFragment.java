@@ -3,6 +3,7 @@ package cl.ipvg.ev2tnt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 import android.os.Bundle;
@@ -22,15 +23,22 @@ public class MapsFragment extends Fragment {
     Double lat = 0.0;
     Double lon = 0.0;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+
             Bundle args = getArguments();
             Double valor1 = args.getDouble("latitud");
             Double valor2 = args.getDouble("longitud");
 
             lat = valor1;
             lon = valor2;
+        }
+    }
+
+    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
 
             LatLng vehiculo= new LatLng(lat, lon);
             googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
@@ -57,5 +65,5 @@ public class MapsFragment extends Fragment {
         }
     }
 
-
 }
+

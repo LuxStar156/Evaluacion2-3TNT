@@ -1,7 +1,9 @@
 package cl.ipvg.ev2tnt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -20,8 +22,12 @@ import android.location.LocationProvider;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        enviarDatos();
 
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
@@ -59,6 +67,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(intentregistro);
+            }
+        });
+    }
+
+    public void enviarDatos(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference =firebaseDatabase.getReference();
+        databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    String latitud = snapshot.child("latitud").getValue().toString();
+                    String longitud = snapshot.child("longitud").getValue().toString();
+
+                    Double lat = Double.parseDouble(latitud);
+                    Double lon = Double.parseDouble(longitud);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("latitud", lat);
+                    bundle.putDouble("longitud",lon);
+
+                    MapsFragment fragment = new MapsFragment();
+                    fragment.setArguments(bundle);
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.gmap1, fragment);
+                    transaction.commit();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
