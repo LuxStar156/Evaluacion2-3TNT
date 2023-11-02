@@ -54,6 +54,4 @@ public class LeerDatos extends Service { //En construcción
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-
 }

@@ -25,13 +25,6 @@ public class MapsFragment extends Fragment {
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            Bundle args = getArguments();
-            Double valor1 = args.getDouble("latitud");
-            Double valor2 = args.getDouble("longitud");
-
-            lat = valor1;
-            lon = valor2;
-
             LatLng vehiculo= new LatLng(lat, lon);
             googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(vehiculo));
@@ -41,10 +34,16 @@ public class MapsFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        Double valor1 = args.getDouble("latitud");
+        Double valor2 = args.getDouble("longitud");
+
+        lat = valor1;
+        lon = valor2;
+
         return inflater.inflate(R.layout.fragment_maps, container, false);
+
     }
 
     @Override

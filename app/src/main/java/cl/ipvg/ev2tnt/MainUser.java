@@ -3,6 +3,7 @@ package cl.ipvg.ev2tnt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
@@ -36,6 +37,7 @@ public class MainUser extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +84,11 @@ public class MainUser extends AppCompatActivity {
                     MapsFragment fragment = new MapsFragment();
                     fragment.setArguments(bundle);
 
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.gmap1, fragment);
-                    transaction.commit();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setReorderingAllowed(true);
+                    fragmentTransaction.replace(R.id.gmapUser,fragment);
+                    fragmentTransaction.commit();
                 }
             }
 

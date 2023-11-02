@@ -1,11 +1,20 @@
 package cl.ipvg.ev2tnt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Inicio extends AppCompatActivity {
     Button btUser;
@@ -37,9 +46,9 @@ public class Inicio extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(intent2);
-
             }
         });
     }
+
 
 }
