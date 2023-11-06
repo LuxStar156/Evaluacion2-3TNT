@@ -35,16 +35,11 @@ import java.util.Locale;
 
 public class MainUser extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
-
-        enviarDatos();
 
         tvLatitud = (TextView) findViewById(R.id.tVLatitudUser);
         tvLongitud = (TextView) findViewById(R.id.tVLongitudUser);
@@ -63,41 +58,7 @@ public class MainUser extends AppCompatActivity {
 
     }
 
-    public void enviarDatos(){
-        FirebaseApp.initializeApp(this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference =firebaseDatabase.getReference();
-        databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    String latitud = snapshot.child("latitud").getValue().toString();
-                    String longitud = snapshot.child("longitud").getValue().toString();
 
-                    Double lat = Double.parseDouble(latitud);
-                    Double lon = Double.parseDouble(longitud);
-
-                    Bundle bundle = new Bundle();
-                    bundle.putDouble("latitud", lat);
-                    bundle.putDouble("longitud",lon);
-
-                    MapsFragment fragment = new MapsFragment();
-                    fragment.setArguments(bundle);
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.setReorderingAllowed(true);
-                    fragmentTransaction.replace(R.id.gmapUser,fragment);
-                    fragmentTransaction.commit();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     //----------------------------------------------------codigo para geolocalizacion----------------------------------------------
     private void locationStart(){

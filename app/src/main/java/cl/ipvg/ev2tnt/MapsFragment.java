@@ -19,11 +19,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class MapsFragment extends Fragment {
-    Double lat = 0.0;
-    Double lon = 0.0;
+    Double lat = 34.0;
+    Double lon = 144.0;
+    Bundle args;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
+
+
         public void onMapReady(GoogleMap googleMap) {
             LatLng vehiculo= new LatLng(lat, lon);
             googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
@@ -35,12 +38,7 @@ public class MapsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        Double valor1 = args.getDouble("latitud");
-        Double valor2 = args.getDouble("longitud");
 
-        lat = valor1;
-        lon = valor2;
 
         return inflater.inflate(R.layout.fragment_maps, container, false);
 
