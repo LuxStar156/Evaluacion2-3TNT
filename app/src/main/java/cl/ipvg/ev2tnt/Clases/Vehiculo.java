@@ -10,20 +10,15 @@ public class Vehiculo {
     private String marca;
     private String modelo;
     private String linea;
-    private String latitud;
-    private String longitud;
+    private Double latitud;
+    private Double longitud;
     private String direccion;
 
     public Vehiculo(){
       //contructor para DataSnapshot(Leer datos)
     }
 
-    public Vehiculo(String latitud,String longitud) {
-        this.latitud = latitud;
-        this.longitud = longitud;
-    }
-
-    public Vehiculo(String id, String nombre, String apellido, String matricula, String marca, String modelo, String linea, String latitud, String longitud, String direccion) {
+    public Vehiculo(String id, String nombre, String apellido, String matricula, String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -93,19 +88,19 @@ public class Vehiculo {
         this.linea = linea;
     }
 
-    public String getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(String latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
-    public String getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(String longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 

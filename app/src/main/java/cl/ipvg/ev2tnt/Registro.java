@@ -69,21 +69,24 @@ public class Registro extends AppCompatActivity {
         btRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String,Object> vehiculo = new HashMap<>(); //Lo incluí como hashmap, me funciona mejor
+                Double lat = Double.parseDouble(Latitud);
+                Double lon = Double.parseDouble(Longitud);
+                Vehiculo vehiculo = new Vehiculo(); //Map<String,Object> vehiculo = new HashMap<>();
 
-                vehiculo.put("id",UUID.randomUUID().toString());
-                vehiculo.put("nombre",etNombre.getText().toString());
-                vehiculo.put("apellido",etApellido.getText().toString());
-                vehiculo.put("matricula",etMatricula.getText().toString());
-                vehiculo.put("marca",etMarca.getText().toString());
-                vehiculo.put("modelo",etModelo.getText().toString());
-                vehiculo.put("linea",etLinea.getText().toString());
-                vehiculo.put("latitud",Latitud);
-                vehiculo.put("longitud",Longitud);
-                vehiculo.put("direccion",Direccion);
+                vehiculo.setId(UUID.randomUUID().toString());
+                vehiculo.setNombre(etNombre.getText().toString());
+                vehiculo.setApellido(etApellido.getText().toString());
+                vehiculo.setMatricula(etMatricula.getText().toString());
+                vehiculo.setMarca(etMarca.getText().toString());
+                vehiculo.setModelo(etModelo.getText().toString());
+                vehiculo.setLinea(etLinea.getText().toString());
+                vehiculo.setLatitud(lat);
+                vehiculo.setLongitud(lon);
+                vehiculo.setDireccion(Direccion);
+
 
                 try {
-                    databaseReference.child("Vehiculo").setValue(vehiculo);
+                    databaseReference.child("Vehiculo").child(vehiculo.getId()).setValue(vehiculo);
                     Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "Sus datos fueron registrados exitosamente", Snackbar.LENGTH_SHORT).show();
                 }catch (UnsupportedOperationException e){
                     Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "ERROR, Sus datos no fueron registrados", Snackbar.LENGTH_SHORT).show();

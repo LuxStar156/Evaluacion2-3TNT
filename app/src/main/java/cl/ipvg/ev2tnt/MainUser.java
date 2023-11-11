@@ -19,10 +19,12 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,25 +35,28 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import cl.ipvg.ev2tnt.Clases.Vehiculo;
+
 public class MainUser extends AppCompatActivity {
-    TextView tvLatitud, tvLongitud, tvDireccion;
+    TextView tvLatitud, tvLongitud, tvDireccion, lats, lons;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
+    Double lat;
+    Double lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
-
         enviarDatos();
+
+
 
         tvLatitud = (TextView) findViewById(R.id.tVLatitudUser);
         tvLongitud = (TextView) findViewById(R.id.tVLongitudUser);
         tvDireccion = (TextView) findViewById(R.id.tVDireccionUser);
-
-        MapsFragment mapfragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
+        lats = (TextView) findViewById(R.id.textView4);
+        lons = (TextView) findViewById(R.id.textView5);
 
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -67,36 +72,28 @@ public class MainUser extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference =firebaseDatabase.getReference();
-        databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
+
+        ValueEventListener Dir = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    String latitud = snapshot.child("latitud").getValue().toString();
-                    String longitud = snapshot.child("longitud").getValue().toString();
+                Vehiculo vehiculoL = snapshot.getValue(Vehiculo.class);
+                lat = vehiculoL.getLatitud();
+                lon = vehiculoL.getLongitud();
 
-                    Double lat = Double.parseDouble(latitud);
-                    Double lon = Double.parseDouble(longitud);
+                MapsFragment mapfragment = new MapsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putDouble("latitud", lat);
-                    bundle.putDouble("longitud",lon);
 
-                    MapsFragment fragment = new MapsFragment();
-                    fragment.setArguments(bundle);
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.setReorderingAllowed(true);
-                    fragmentTransaction.replace(R.id.gmapUser,fragment);
-                    fragmentTransaction.commit();
-                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
-        });
+
+        };
+
+        databaseReference.addValueEventListener(Dir);
+
     }
 
     //----------------------------------------------------codigo para geolocalizacion----------------------------------------------
