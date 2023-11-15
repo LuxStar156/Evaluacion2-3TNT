@@ -1,6 +1,5 @@
 package cl.ipvg.ev2tnt.Servicios;
 
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -16,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 
 public class LeerDatos extends Service { //En construcción
     FirebaseDatabase firebaseDatabase;

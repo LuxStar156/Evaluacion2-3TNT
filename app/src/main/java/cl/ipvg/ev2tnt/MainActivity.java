@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
     Button btRegistro;
     Intent intentregistro;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
