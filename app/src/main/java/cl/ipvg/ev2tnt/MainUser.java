@@ -25,8 +25,7 @@ public class MainUser extends AppCompatActivity {
     ListView lvehiculo;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    Double lat;
-    Double lon;
+
     private List<Vehiculo> Listvehiculo = new ArrayList<Vehiculo>();
     private List<String> ListVehiculoNombre = new ArrayList();
     ArrayAdapter<String> arrayAdapterString;
@@ -39,9 +38,6 @@ public class MainUser extends AppCompatActivity {
         lvehiculo = (ListView) findViewById(R.id.tvListado);
         inicializarFireBase();
         enviarDatos();
-
-        MapsFragment mapfragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
 
     }
 
@@ -57,6 +53,9 @@ public class MainUser extends AppCompatActivity {
                     ListVehiculoNombre.add(""+li.getNombre()+" "+li.getApellido()+" "+li.getLinea());
                     arrayAdapterString =new ArrayAdapter<String>(MainUser.this, android.R.layout.simple_expandable_list_item_1,ListVehiculoNombre);
                     lvehiculo.setAdapter(arrayAdapterString);
+
+                    MapsFragment mapfragment = new MapsFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
                 }
             }
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,19 +17,46 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
 
 public class MapsFragment extends Fragment {
-    Double lat = 0.0;
-    Double lon = 0.0;
-
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    private List<Vehiculo> Listvehiculo = new ArrayList<Vehiculo>();
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
+            inicializarFireBase();
+            databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Listvehiculo.clear();
+                    for (DataSnapshot objs : snapshot.getChildren()){
+                        Vehiculo li =objs.getValue(Vehiculo.class);
+                        Listvehiculo.add(li);
 
-            LatLng vehiculo= new LatLng(lat, lon);
-            googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(vehiculo));
+                        LatLng vehiculo= new LatLng(li.getLatitud(), li.getLongitud());
+                        googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
 
         }
     };
@@ -49,5 +77,9 @@ public class MapsFragment extends Fragment {
         }
     }
 
-
+    private void inicializarFireBase(){
+        FirebaseApp.initializeApp(getView().getContext());
+        firebaseDatabase =FirebaseDatabase.getInstance();
+        databaseReference =firebaseDatabase.getReference();
+    }
 }
