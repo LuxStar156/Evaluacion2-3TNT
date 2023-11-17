@@ -71,7 +71,7 @@ public class Registro extends AppCompatActivity {
             public void onClick(View view) {
                 Double lat = Double.parseDouble(Latitud);
                 Double lon = Double.parseDouble(Longitud);
-                Vehiculo vehiculo = new Vehiculo(); //Map<String,Object> vehiculo = new HashMap<>();
+                Vehiculo vehiculo = new Vehiculo();
 
                 vehiculo.setId(UUID.randomUUID().toString());
                 vehiculo.setNombre(etNombre.getText().toString());

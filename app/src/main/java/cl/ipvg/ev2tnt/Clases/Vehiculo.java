@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 
 public class Vehiculo {
     private String id;
+    private String rut;
+    private String contrasena;
     private String nombre;
     private String apellido;
     private String matricula;
@@ -18,8 +20,10 @@ public class Vehiculo {
       //contructor para DataSnapshot(Leer datos)
     }
 
-    public Vehiculo(String id, String nombre, String apellido, String matricula, String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
+    public Vehiculo(String id, String rut, String contrasena,String nombre, String apellido, String matricula, String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
         this.id = id;
+        this.rut = rut;
+        this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;
@@ -38,6 +42,22 @@ public class Vehiculo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getNombre() {
