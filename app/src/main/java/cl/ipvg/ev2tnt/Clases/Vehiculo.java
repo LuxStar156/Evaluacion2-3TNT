@@ -20,6 +20,12 @@ public class Vehiculo {
       //contructor para DataSnapshot(Leer datos)
     }
 
+    public Vehiculo(String rut,Double latitud, Double longitud){
+        this.rut = rut;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
     public Vehiculo(String id, String rut, String contrasena,String nombre, String apellido, String matricula, String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
         this.id = id;
         this.rut = rut;

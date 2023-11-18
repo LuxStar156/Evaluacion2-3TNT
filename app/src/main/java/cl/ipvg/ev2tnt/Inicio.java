@@ -17,10 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Inicio extends AppCompatActivity {
-    Button btUser;
-    Button btDriver;
-    Intent intent1;
-    Intent intent2;
+    Button btUser,btDriver,btRegis;
+    Intent intent1,intent2,intent3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +26,18 @@ public class Inicio extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
 
 
-        intent1 = new Intent(this, MainActivity.class);
+        intent1 = new Intent(this, Login.class);
         intent2 = new Intent(this, MainUser.class);
+        intent3 = new Intent(this, Registro.class);
 
         btUser = (Button) findViewById(R.id.btUsuario);
         btDriver = (Button) findViewById(R.id.btConductor);
+        btRegis = (Button) findViewById(R.id.btRegis0);
 
         btDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(intent1);
-
             }
         });
 
@@ -46,6 +45,13 @@ public class Inicio extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(intent2);
+            }
+        });
+
+        btRegis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intent3);
             }
         });
     }

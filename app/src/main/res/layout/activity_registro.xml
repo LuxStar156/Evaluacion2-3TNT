@@ -51,8 +51,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:hint="Rut"
-            android:inputType="text"
-            android:text="" />
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/editTextContra"
@@ -61,8 +60,7 @@
             android:layout_marginBottom="30dp"
             android:ems="10"
             android:hint="Contraseña"
-            android:inputType="text"
-            android:text="" />
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/editTextNombre"

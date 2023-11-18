@@ -37,7 +37,7 @@ import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
 public class Registro extends AppCompatActivity {
 
-    EditText etNombre, etApellido, etMatricula, etMarca, etModelo,etLinea;
+    EditText etRut,etContra,etNombre, etApellido, etMatricula, etMarca, etModelo,etLinea;
     String Latitud, Longitud, Direccion;
     Button btRegis;
 
@@ -51,6 +51,8 @@ public class Registro extends AppCompatActivity {
 
         inicializarFireBase();
         btRegis = (Button) findViewById(R.id.btRegistrar);
+        etRut = (EditText) findViewById(R.id.editTextRut);
+        etContra = (EditText) findViewById(R.id.editTextContra);
         etNombre = (EditText) findViewById(R.id.editTextNombre);
         etApellido = (EditText) findViewById(R.id.editTextApellido);
         etMatricula = (EditText) findViewById(R.id.editTextMatricula);
@@ -74,6 +76,8 @@ public class Registro extends AppCompatActivity {
                 Vehiculo vehiculo = new Vehiculo();
 
                 vehiculo.setId(UUID.randomUUID().toString());
+                vehiculo.setRut(etRut.getText().toString());
+                vehiculo.setContrasena(etContra.getText().toString());
                 vehiculo.setNombre(etNombre.getText().toString());
                 vehiculo.setApellido(etApellido.getText().toString());
                 vehiculo.setMatricula(etMatricula.getText().toString());
