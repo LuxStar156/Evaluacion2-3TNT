@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.Manifest;
 import android.content.Context;
@@ -29,7 +30,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
-    Button btRegistro;
+    Switch sGPS;
     Intent intentregistro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +43,23 @@ public class MainActivity extends AppCompatActivity {
         tvLatitud = (TextView) findViewById(R.id.tVLatitud);
         tvLongitud = (TextView) findViewById(R.id.tVLongitud);
         tvDireccion = (TextView) findViewById(R.id.tVDireccion);
-        btRegistro = (Button) findViewById(R.id.btIngresardatos);
+        sGPS = (Switch) findViewById(R.id.switchGPS);
         intentregistro = new Intent(this, Registro.class);
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,},1000);
+        if (sGPS.isChecked()) {
 
-        }else {
-            locationStart();
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+
+            } else {
+
+                locationStart();
+
+
+            }
         }
 
-        btRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intentregistro);
-            }
-        });
     }
 
     //---------------------------------------------codigo para geolocalizacion-------------------------------------------
