@@ -33,7 +33,6 @@ import cl.ipvg.ev2tnt.Clases.Vehiculo;
 public class MapsFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    private List<Vehiculo> Listvehiculo = new ArrayList<Vehiculo>();
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
@@ -41,10 +40,8 @@ public class MapsFragment extends Fragment {
             databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Listvehiculo.clear();
                     for (DataSnapshot objs : snapshot.getChildren()){
                         Vehiculo li =objs.getValue(Vehiculo.class);
-                        Listvehiculo.add(li);
 
                         if (li.getEstado() == true) {
                             LatLng vehiculo = new LatLng(li.getLatitud(), li.getLongitud());

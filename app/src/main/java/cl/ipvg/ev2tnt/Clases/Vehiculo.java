@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Vehiculo {
-    private String id;
     private String rut;
     private String contrasena;
     private String nombre;
@@ -24,16 +23,8 @@ public class Vehiculo {
       //contructor para DataSnapshot(Leer datos)
     }
 
-    public Vehiculo(String rut,Double latitud, Double longitud){
-        this.rut= rut;
-        this.latitud = latitud;
-        this.longitud = longitud;
-
-    }
-
-    public Vehiculo(String id, String rut, String contrasena,String nombre, String apellido, Boolean estado,String matricula,
+    public Vehiculo(String rut, String contrasena,String nombre, String apellido, Boolean estado,String matricula,
                     String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
-        this.id = id;
         this.rut = rut;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -47,23 +38,6 @@ public class Vehiculo {
         this.longitud = longitud;
         this.direccion = direccion;
 
-    }
-
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("id", this.id);
-        result.put("latitud", this.latitud);
-        result.put("longitud", this.longitud);
-
-        return result;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getRut() {

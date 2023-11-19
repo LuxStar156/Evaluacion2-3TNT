@@ -72,7 +72,6 @@ public class Registro extends AppCompatActivity {
                 Double lon = Double.parseDouble(Longitud);
                 Vehiculo vehiculo = new Vehiculo();
 
-                vehiculo.setId(UUID.randomUUID().toString());
                 vehiculo.setRut(etRut.getText().toString());
                 vehiculo.setContrasena(etContra.getText().toString());
                 vehiculo.setNombre(etNombre.getText().toString());
@@ -88,7 +87,8 @@ public class Registro extends AppCompatActivity {
 
 
                 try {
-                    databaseReference.child("Vehiculo").child(vehiculo.getId()).setValue(vehiculo);
+                    databaseReference.child("Vehiculo").child(vehiculo.getRut()
+                    ).setValue(vehiculo);
                     Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "Sus datos fueron registrados exitosamente", Snackbar.LENGTH_SHORT).show();
                 }catch (UnsupportedOperationException e){
                     Snackbar.make(findViewById(R.id.snackbar_RegistroTrue), "ERROR, Sus datos no fueron registrados", Snackbar.LENGTH_SHORT).show();

@@ -19,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
@@ -28,9 +30,9 @@ public class Login extends AppCompatActivity {
     EditText etRut,etContra;
     TextView tvError;
     Intent intent;
+    Boolean aceptado;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    private List<Vehiculo> Listvehiculo = new ArrayList<Vehiculo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class Login extends AppCompatActivity {
         inicializarFireBase();
         intent = new Intent(this,MainActivity.class);
         btAceptar = (Button) findViewById(R.id.btMain);
-        etRut = (EditText) findViewById(R.id.editTextRut1);
+        etRut = (EditText) findViewById(R.id.editTextRutLogin);
         etContra = (EditText) findViewById(R.id.editTextContra1);
         tvError = (TextView) findViewById(R.id.tvErrorDatos);
 
@@ -50,15 +52,16 @@ public class Login extends AppCompatActivity {
                 databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Listvehiculo.clear();
                         for (DataSnapshot objs : snapshot.getChildren()){
                             Vehiculo li =objs.getValue(Vehiculo.class);
-                            Listvehiculo.add(li);
 
                             if(etRut.getText().toString().equals(li.getRut()) && etContra.getText().toString().equals(li.getContrasena())){
+                                aceptado = true;
+                                databaseReference.child("Vehiculo/"+etRut.getText().toString()+"/estado").setValue(aceptado);
                                 intent.putExtra("intentID",etRut.getText().toString());
                                 startActivity(intent);
                             }else{
+                                aceptado = false;
                                 tvError.setText("No coinciden los campos");
                             }
 
