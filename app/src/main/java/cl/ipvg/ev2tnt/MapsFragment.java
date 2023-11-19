@@ -41,7 +41,7 @@ public class MapsFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot objs : snapshot.getChildren()){
-                        Vehiculo li =objs.getValue(Vehiculo.class);
+                        Vehiculo li = objs.getValue(Vehiculo.class);
 
                         if (li.getEstado() == true) {
                             LatLng vehiculo = new LatLng(li.getLatitud(), li.getLongitud());

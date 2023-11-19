@@ -36,8 +36,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="333dp"
-        android:layout_height="412dp"
+        android:layout_width="340dp"
+        android:layout_height="613dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="28dp"
@@ -53,36 +53,6 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tVLatitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="9dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/tVLongitud"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tVLongitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="14dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/tVDireccion"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tVDireccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"

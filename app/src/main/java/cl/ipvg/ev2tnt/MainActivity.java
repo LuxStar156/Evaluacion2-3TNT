@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     String tvLatitud, tvLongitud, tvDireccion;
     String uRut;
     final int tiempo = 5000;
+    final Boolean denegar = false;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -59,22 +60,27 @@ public class MainActivity extends AppCompatActivity {
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
 
-        //tvLatitud = (TextView) findViewById(R.id.tVLatitud);
-        //tvLongitud = (TextView) findViewById(R.id.tVLongitud);
-      //  tvDireccion = (TextView) findViewById(R.id.tVDireccion);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
 
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+        } else {
+            locationStart();
 
-            } else {
-                    locationStart();
+        }
+    }
 
-            }
-
+    protected void onStop() {
+        super.onStop();
+        databaseReference.child("Vehiculo/" + uRut + "/estado").setValue(denegar);
 
     }
 
+    protected void onDestroy(){
+        super.onDestroy();
+        databaseReference.child("Vehiculo/"+uRut+"/estado").setValue(denegar);
+
+    }
     //---------------------------------------------codigo para geolocalizacion-------------------------------------------
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -101,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               actualizarDatos();
+                actualizarDatos();
                 handler.postDelayed(this,5000);
             }
         },5000);
@@ -111,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 Double userLat = Double.parseDouble(tvLatitud);
                 Double userLong = Double.parseDouble(tvLongitud);
 
-                    databaseReference.child("Vehiculo/"+uRut+"/latitud").setValue(tvLatitud);
-                    databaseReference.child("Vehiculo/"+uRut+"/longitud").setValue(tvLongitud);
-                    databaseReference.child("Vehiculo/"+uRut+"/direccion").setValue(tvDireccion);
+                databaseReference.child("Vehiculo/"+uRut+"/latitud").setValue(userLat);
+                databaseReference.child("Vehiculo/"+uRut+"/longitud").setValue(userLong);
+                databaseReference.child("Vehiculo/"+uRut+"/direccion").setValue(tvDireccion);
 
     }
 
