@@ -46,8 +46,11 @@ public class MapsFragment extends Fragment {
                         Vehiculo li =objs.getValue(Vehiculo.class);
                         Listvehiculo.add(li);
 
-                        LatLng vehiculo= new LatLng(li.getLatitud(), li.getLongitud());
-                        googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
+                        if (li.getEstado() == true) {
+                            LatLng vehiculo = new LatLng(li.getLatitud(), li.getLongitud());
+                            googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
+
+                        }
                     }
                 }
 

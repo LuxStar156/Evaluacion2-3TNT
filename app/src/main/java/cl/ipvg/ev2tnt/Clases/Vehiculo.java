@@ -8,6 +8,7 @@ public class Vehiculo {
     private String contrasena;
     private String nombre;
     private String apellido;
+    private Boolean estado;
     private String matricula;
     private String marca;
     private String modelo;
@@ -20,18 +21,21 @@ public class Vehiculo {
       //contructor para DataSnapshot(Leer datos)
     }
 
-    public Vehiculo(String rut,Double latitud, Double longitud){
-        this.rut = rut;
+    public Vehiculo(String id,Double latitud, Double longitud){
+        this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
+
     }
 
-    public Vehiculo(String id, String rut, String contrasena,String nombre, String apellido, String matricula, String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
+    public Vehiculo(String id, String rut, String contrasena,String nombre, String apellido, Boolean estado,String matricula,
+                    String marca, String modelo, String linea, Double latitud, Double longitud, String direccion) {
         this.id = id;
         this.rut = rut;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.estado = estado;
         this.matricula = matricula;
         this.marca = marca;
         this.modelo = modelo;
@@ -80,6 +84,14 @@ public class Vehiculo {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public String getMatricula() {

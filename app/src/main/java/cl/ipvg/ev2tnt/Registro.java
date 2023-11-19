@@ -80,6 +80,7 @@ public class Registro extends AppCompatActivity {
                 vehiculo.setContrasena(etContra.getText().toString());
                 vehiculo.setNombre(etNombre.getText().toString());
                 vehiculo.setApellido(etApellido.getText().toString());
+                vehiculo.setEstado(false);
                 vehiculo.setMatricula(etMatricula.getText().toString());
                 vehiculo.setMarca(etMarca.getText().toString());
                 vehiculo.setModelo(etModelo.getText().toString());
