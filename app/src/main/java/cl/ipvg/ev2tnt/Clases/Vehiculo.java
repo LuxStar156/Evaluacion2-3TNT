@@ -2,6 +2,9 @@ package cl.ipvg.ev2tnt.Clases;
 
 import androidx.annotation.NonNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Vehiculo {
     private String id;
     private String rut;
@@ -21,8 +24,8 @@ public class Vehiculo {
       //contructor para DataSnapshot(Leer datos)
     }
 
-    public Vehiculo(String id,Double latitud, Double longitud){
-        this.id = id;
+    public Vehiculo(String rut,Double latitud, Double longitud){
+        this.rut= rut;
         this.latitud = latitud;
         this.longitud = longitud;
 
@@ -44,6 +47,15 @@ public class Vehiculo {
         this.longitud = longitud;
         this.direccion = direccion;
 
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", this.id);
+        result.put("latitud", this.latitud);
+        result.put("longitud", this.longitud);
+
+        return result;
     }
 
     public String getId() {

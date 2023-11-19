@@ -21,16 +21,25 @@ import android.location.LocationProvider;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+
+import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
-    Switch sGPS;
+    String uRut;
+    Double userLat, userLong;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         tvLatitud = (TextView) findViewById(R.id.tVLatitud);
         tvLongitud = (TextView) findViewById(R.id.tVLongitud);
         tvDireccion = (TextView) findViewById(R.id.tVDireccion);
-        sGPS = (Switch) findViewById(R.id.switchGPS);
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -76,6 +84,25 @@ public class MainActivity extends AppCompatActivity {
         tvLatitud.setText("Localización GPS");
         tvDireccion.setText("");
 
+    }
+
+    public void actualizarDatos(){
+        inicializarFireBase();
+
+        String key = databaseReference.child("Vehiculo").push().getKey();
+        Vehiculo vehiculo = new Vehiculo(uRut,userLat,userLong);
+        Map<String, Object> valores = vehiculo.toMap();
+
+        Map<String,Object> actualizar = new HashMap<>();
+        actualizar.put("/Vehiculo/" + uRut + "/" + key , valores);
+
+        databaseReference.updateChildren(actualizar);
+    }
+
+    private void inicializarFireBase(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase =FirebaseDatabase.getInstance();
+        databaseReference =firebaseDatabase.getReference();
     }
 
     public void setLocation(Location loc) {

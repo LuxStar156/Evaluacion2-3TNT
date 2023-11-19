@@ -37,12 +37,11 @@ public class MainUser extends AppCompatActivity {
 
         lvehiculo = (ListView) findViewById(R.id.tvListado);
         inicializarFireBase();
-        enviarDatos();
+        leerDatos();
 
     }
 
-    public void enviarDatos(){
-
+    public void leerDatos(){
         databaseReference.child("Vehiculo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
