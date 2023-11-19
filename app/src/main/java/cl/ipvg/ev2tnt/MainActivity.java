@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -38,14 +39,20 @@ public class MainActivity extends AppCompatActivity {
     TextView tvLatitud, tvLongitud, tvDireccion;
     String uRut;
     Double userLat, userLong;
+    final int tiempo = 5000;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        uRut = getIntent().getExtras().getString("intentID");
 
+        inicializarFireBase();
+        actualizarDatos();
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
 
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     locationStart();
 
             }
+        resfrescarActualizacion();
 
     }
 
@@ -87,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void actualizarDatos(){
-        inicializarFireBase();
-
         String key = databaseReference.child("Vehiculo").push().getKey();
         Vehiculo vehiculo = new Vehiculo(uRut,userLat,userLong);
         Map<String, Object> valores = vehiculo.toMap();
@@ -97,6 +103,18 @@ public class MainActivity extends AppCompatActivity {
         actualizar.put("/Vehiculo/" + uRut + "/" + key , valores);
 
         databaseReference.updateChildren(actualizar);
+
+    }
+
+    public void resfrescarActualizacion(){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                actualizarDatos();
+                handler.postDelayed(this,tiempo);
+
+            }
+        },tiempo);
     }
 
     private void inicializarFireBase(){

@@ -56,6 +56,7 @@ public class Login extends AppCompatActivity {
                             Listvehiculo.add(li);
 
                             if(etRut.getText().toString().equals(li.getRut()) && etContra.getText().toString().equals(li.getContrasena())){
+                                intent.putExtra("intentID",etRut.getText().toString());
                                 startActivity(intent);
                             }else{
                                 tvError.setText("No coinciden los campos");
