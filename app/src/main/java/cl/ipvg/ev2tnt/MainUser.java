@@ -49,10 +49,13 @@ public class MainUser extends AppCompatActivity {
                 for (DataSnapshot objs : snapshot.getChildren()){
                     Vehiculo li =objs.getValue(Vehiculo.class);
                     Listvehiculo.add(li);
-                    ListVehiculoNombre.add(""+li.getNombre()+" "+li.getApellido()+" "+li.getLinea());
-                    arrayAdapterString =new ArrayAdapter<String>(MainUser.this, android.R.layout.simple_expandable_list_item_1,ListVehiculoNombre);
-                    lvehiculo.setAdapter(arrayAdapterString);
 
+                    if (li.getEstado() == true) {
+                        ListVehiculoNombre.add("" + li.getNombre() + " " + li.getApellido() + ", Línea" + li.getLinea() + " (" + li.getMatricula() + ")");
+                        arrayAdapterString = new ArrayAdapter<String>(MainUser.this, android.R.layout.simple_expandable_list_item_1, ListVehiculoNombre);
+                        lvehiculo.setAdapter(arrayAdapterString);
+
+                    }
                     MapsFragment mapfragment = new MapsFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.gmapUser, mapfragment);
                 }

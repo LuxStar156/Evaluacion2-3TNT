@@ -4,81 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/b"
     tools:context=".Registro">
+
+    <Button
+        android:id="@+id/btRegistrar"
+        android:layout_width="375dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="17dp"
+        android:backgroundTint="@color/c"
+        android:text="Aceptar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="179dp"
-        android:text="Registro"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="116dp"
+        android:text="Registrate"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btRegistrar"
-        android:layout_width="311dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:text="Aceptar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
+        android:background="@color/b"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btRegistrar">
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <EditText
             android:id="@+id/editTextRut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Rut"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <EditText
             android:id="@+id/editTextContra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Contraseña"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <EditText
             android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Nombre"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <EditText
             android:id="@+id/editTextApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Apellido"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/snackbar_RegistroTrue"
@@ -90,36 +101,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Matrícula"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <EditText
             android:id="@+id/editTextMarca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Marca"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <EditText
             android:id="@+id/editTextModelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Modelo"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
 
         <EditText
             android:id="@+id/editTextLinea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/e"
             android:ems="10"
             android:hint="Línea de transportes"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/e" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
