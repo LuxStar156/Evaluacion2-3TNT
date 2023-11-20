@@ -45,7 +45,7 @@ public class MapsFragment extends Fragment {
 
                         if (li.getEstado() == true) {
                             LatLng vehiculo = new LatLng(li.getLatitud(), li.getLongitud());
-                            googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!!"));
+                            googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!! (Linea: "+li.getLinea()+" matricula: "+li.getMatricula()+")"));
 
                         }
                     }
