@@ -43,11 +43,11 @@ public class MapsFragment extends Fragment {
                     for (DataSnapshot objs : snapshot.getChildren()){
                         Vehiculo li = objs.getValue(Vehiculo.class);
 
-                        if (li.getEstado() == true) {
+                        //if (li.getEstado() == true) {
                             LatLng vehiculo = new LatLng(li.getLatitud(), li.getLongitud());
-                            googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion!!! (Linea: "+li.getLinea()+" matricula: "+li.getMatricula()+")"));
-
-                        }
+                            googleMap.addMarker(new MarkerOptions().position(vehiculo).title("tu locomocion"));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(vehiculo));
+                        //}
                     }
                 }
 
@@ -80,4 +80,5 @@ public class MapsFragment extends Fragment {
         firebaseDatabase =FirebaseDatabase.getInstance();
         databaseReference =firebaseDatabase.getReference();
     }
+
 }

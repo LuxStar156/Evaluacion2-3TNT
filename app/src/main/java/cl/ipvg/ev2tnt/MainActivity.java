@@ -42,10 +42,9 @@ import java.util.Objects;
 import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
 public class MainActivity extends AppCompatActivity {
-    String tvLatitud, tvLongitud, tvDireccion;
-    String uRut;
+    String Latitud, Longitud, Direccion;
     final int tiempo = 5000;
-    final Boolean denegar = false;
+    String uRut;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         uRut = getIntent().getExtras().getString("intentID");
 
         inicializarFireBase();
-        ejecutar();
+
         MapsFragment mapfragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.gmap1, mapfragment);
 
@@ -68,18 +67,30 @@ public class MainActivity extends AppCompatActivity {
             locationStart();
 
         }
+
+        actualizarDatos();
+    }
+    public void actualizarDatos(){
+        final Handler handler= new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Double userLat = Double.parseDouble(Latitud);
+                Double userLong = Double.parseDouble(Longitud);
+                databaseReference.child("Vehiculo/"+uRut+"/latitud").setValue(userLat);
+                databaseReference.child("Vehiculo/"+uRut+"/longitud").setValue(userLong);
+                databaseReference.child("Vehiculo/"+uRut+"/direccion").setValue(Direccion);
+                handler.postDelayed(this,5000);
+
+            }
+        },5000);
     }
 
-    protected void onStop() {
-        super.onStop();
-        databaseReference.child("Vehiculo/" + uRut + "/estado").setValue(denegar);
-
-    }
-
-    protected void onDestroy(){
-        super.onDestroy();
-        databaseReference.child("Vehiculo/"+uRut+"/estado").setValue(denegar);
-
+    private void inicializarFireBase(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase =FirebaseDatabase.getInstance();
+        databaseReference =firebaseDatabase.getReference();
     }
     //---------------------------------------------codigo para geolocalizacion-------------------------------------------
     private void locationStart() {
@@ -98,37 +109,10 @@ public class MainActivity extends AppCompatActivity {
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
-        tvLatitud = "Localización GPS";
-        tvDireccion = "";
+        Latitud = "Localización GPS";
+        Direccion = "";
 
     }
-    private void ejecutar(){
-        final Handler handler= new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                actualizarDatos();
-                handler.postDelayed(this,5000);
-            }
-        },5000);
-    }
-
-    public void actualizarDatos(){
-                Double userLat = Double.parseDouble(tvLatitud);
-                Double userLong = Double.parseDouble(tvLongitud);
-
-                databaseReference.child("Vehiculo/"+uRut+"/latitud").setValue(userLat);
-                databaseReference.child("Vehiculo/"+uRut+"/longitud").setValue(userLong);
-                databaseReference.child("Vehiculo/"+uRut+"/direccion").setValue(tvDireccion);
-
-    }
-
-    private void inicializarFireBase(){
-        FirebaseApp.initializeApp(this);
-        firebaseDatabase =FirebaseDatabase.getInstance();
-        databaseReference =firebaseDatabase.getReference();
-    }
-
     public void setLocation(Location loc) {
 
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
@@ -139,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
-                    tvDireccion = DirCalle.getAddressLine(0);
+                    Direccion = DirCalle.getAddressLine(0);
 
                 }
             } catch (IOException e) {
@@ -163,22 +147,22 @@ public class MainActivity extends AppCompatActivity {
         public void onLocationChanged(Location loc) {
             loc.getLatitude();
             loc.getLongitude();
-            tvLatitud = String.valueOf(loc.getLatitude());
-            tvLongitud = String.valueOf(loc.getLongitude());
+            Latitud = String.valueOf(loc.getLatitude());
+            Longitud = String.valueOf(loc.getLongitude());
             this.mainActivity.setLocation(loc);
 
         }
         @Override
         public void onProviderDisabled(String provider){
 
-            tvLatitud = "GPS Desactivado";
+            Latitud = "GPS Desactivado";
 
         }
 
         @Override
         public void onProviderEnabled(String provider){
 
-            tvLatitud = "GPS Activado";
+            Latitud = "GPS Activado";
 
         }
         @Override

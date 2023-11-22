@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
                             Vehiculo li =objs.getValue(Vehiculo.class);
 
                             if(etRut.getText().toString().equals(li.getRut()) && etContra.getText().toString().equals(li.getContrasena())){
-                                aceptado = true;
+                                //aceptado = true;
                                 databaseReference.child("Vehiculo/"+etRut.getText().toString()+"/estado").setValue(aceptado);
                                 intent.putExtra("intentID",etRut.getText().toString());
                                 startActivity(intent);
