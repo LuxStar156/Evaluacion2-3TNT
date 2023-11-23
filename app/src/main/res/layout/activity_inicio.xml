@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/b"
+    android:background="#E6A27C"
     tools:context=".Inicio">
 
     <androidx.constraintlayout.widget.Guideline
@@ -42,7 +42,8 @@
         android:layout_marginStart="46dp"
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/c"
+        android:backgroundTint="#FF9800"
+        android:fontFamily="@font/tauri"
         android:text="Ingresar como pasajero"
         app:layout_constraintBottom_toTopOf="@+id/btConductor"
         app:layout_constraintEnd_toEndOf="parent"

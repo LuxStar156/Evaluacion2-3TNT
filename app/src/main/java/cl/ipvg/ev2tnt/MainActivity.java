@@ -1,15 +1,10 @@
 package cl.ipvg.ev2tnt;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -23,23 +18,14 @@ import android.location.LocationProvider;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-
-import cl.ipvg.ev2tnt.Clases.Vehiculo;
 
 public class MainActivity extends AppCompatActivity {
     String Latitud, Longitud, Direccion;
@@ -47,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     String uRut;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,14 +143,12 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public void onProviderDisabled(String provider){
-
             Latitud = "GPS Desactivado";
 
         }
 
         @Override
         public void onProviderEnabled(String provider){
-
             Latitud = "GPS Activado";
 
         }
